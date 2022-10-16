@@ -1,6 +1,6 @@
 package com.br.api.controller;
 
-import com.br.api.model.Option;
+import com.br.api.model.CategoryOption;
 import com.br.api.service.OptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +17,13 @@ public class OptionController {
     private final OptionService optionService;
 
     @GetMapping("/options")
-    public ResponseEntity<List<Option>> getOptions(){
+    public ResponseEntity<List<CategoryOption>> getOptions(){
         return ResponseEntity.ok().body(optionService.getOptions());
     }
 
     @PostMapping("/option")
-    public ResponseEntity<Option>saveOption(@RequestBody Option option){
+    public ResponseEntity<CategoryOption>saveOption(@RequestBody CategoryOption categoryOption){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
-        return ResponseEntity.created(uri).body(optionService.saveOption(option));
+        return ResponseEntity.created(uri).body(optionService.saveOption(categoryOption));
     }
 }

@@ -1,8 +1,6 @@
 package com.br.api.service;
 
-import com.br.api.model.Category;
-import com.br.api.model.Option;
-import com.br.api.repository.CategoryRepository;
+import com.br.api.model.CategoryOption;
 import com.br.api.repository.OptionRepository;
 import com.br.api.service.definition.OptionServiceDefinition;
 import lombok.RequiredArgsConstructor;
@@ -17,28 +15,22 @@ import java.util.List;
 @Transactional
 @Slf4j
 public class OptionService implements OptionServiceDefinition {
-    private CategoryRepository categoryRepository;
-    private OptionRepository optionRepository;
+    private final OptionRepository optionRepository;
 
     @Override
-    public Option saveOption(Option option) {
-        return optionRepository.save(option);
+    public CategoryOption saveOption(CategoryOption categoryOption) {
+        log.info("Saving new option to the database");
+        return optionRepository.save(categoryOption);
     }
 
     @Override
-    public void setCategoryToOption(String optionName, String categoryName) {
-        Option option = optionRepository.findOptionByOptionName(optionName);
-        Category category = categoryRepository.findByCategoryName(categoryName);
-        option.setCategory(category);
+    public CategoryOption getOption(String name) {
+        log.info("Fetching option {}", name);
+        return optionRepository.findOptionByName(name);
     }
 
     @Override
-    public Option getOption(String option) {
-        return optionRepository.findOptionByOptionName(option);
-    }
-
-    @Override
-    public List<Option> getOptions() {
+    public List<CategoryOption> getOptions() {
         return optionRepository.findAll();
     }
 }

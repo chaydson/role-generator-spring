@@ -22,7 +22,7 @@ public class CategoryController {
     }
 
     @PostMapping("/category")
-    public ResponseEntity<Category>saveCategory(@RequestBody Category category){
+    public ResponseEntity<Category>saveUser(@RequestBody Category category){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
         return ResponseEntity.created(uri).body(categoryService.saveCategory(category));
     }

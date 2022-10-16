@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface CategoryServiceDefinition {
     Category saveCategory(Category category);
-    void addOptionsToCategory(String categoryName, String optionName);
-    Category getCategory(String category);
+    Category getCategory(String name);
     List<Category> getCategories();
 }
