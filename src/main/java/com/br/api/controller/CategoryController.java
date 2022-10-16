@@ -1,5 +1,6 @@
 package com.br.api.controller;
 
+import com.br.api.controller.form.OptionToCategoryForm;
 import com.br.api.model.Category;
 import com.br.api.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,11 @@ public class CategoryController {
     public ResponseEntity<Category>saveUser(@RequestBody Category category){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
         return ResponseEntity.created(uri).body(categoryService.saveCategory(category));
+    }
+
+    @PostMapping("/category/option")
+    public ResponseEntity<?>OptionToCategory(@RequestBody OptionToCategoryForm form){
+        categoryService.addOptionToCategory(form.getOption(), form.getCategory());
+        return ResponseEntity.ok().build();
     }
 }

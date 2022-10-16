@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.br.api.controller.form.CategoryToUserForm;
 import com.br.api.model.AppUser;
 import com.br.api.service.AppUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,6 +44,12 @@ public class AppUserController {
         return ResponseEntity.created(uri).body(userService.saveUser(appUser));
     }
 
+    @PostMapping("/user/category")
+    public ResponseEntity<?>CategoryToUser(@RequestBody CategoryToUserForm form){
+        userService.addCategoryToUser(form.getUsername(), form.getCategory());
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
@@ -77,3 +84,4 @@ public class AppUserController {
         }
     }
 }
+

@@ -23,10 +23,6 @@ public class ApiApplication {
 	@Bean
 	CommandLineRunner run(AppUserService userService, CategoryService categoryService, OptionService optionService){
 		return args -> {
-			userService.saveUser(new AppUser(null, "teste1", "teste1", "teste1", "teste1"));
-			userService.saveUser(new AppUser(null, "teste2", "teste2", "teste2", "teste2"));
-			userService.saveUser(new AppUser(null, "teste3", "teste3", "teste3", "teste3"));
-
 			categoryService.saveCategory(new Category(null, "categoriaTest1"));
 			categoryService.saveCategory(new Category(null, "categoriaTest2"));
 			categoryService.saveCategory(new Category(null, "categoriaTest3"));
@@ -34,7 +30,14 @@ public class ApiApplication {
 
 			optionService.saveOption(new CategoryOption(null, "optionTeste1"));
 			optionService.saveOption(new CategoryOption(null, "optionTeste2"));
-			optionService.saveOption(new CategoryOption(null, "optionTeste3"));
+
+			userService.saveUser(new AppUser(null, "teste1", "teste1", "teste1", "teste1"));
+			userService.addCategoryToUser("teste1", "categoriaTest1");
+			userService.addCategoryToUser("teste1", "categoriaTest2");
+
+			userService.saveUser(new AppUser(null, "teste2", "teste2", "teste2", "teste2"));
+
+			categoryService.addOptionToCategory("optionTeste1", "categoriaTest1");
 		};
 	}
 

@@ -1,7 +1,9 @@
 package com.br.api.service;
 
 import com.br.api.model.AppUser;
+import com.br.api.model.Category;
 import com.br.api.repository.AppUserRepository;
+import com.br.api.repository.CategoryRepository;
 import com.br.api.service.definition.AppUserServiceDefinition;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,8 @@ import java.util.List;
 @Service @RequiredArgsConstructor @Transactional @Slf4j
 public class AppUserService implements AppUserServiceDefinition, UserDetailsService {
     private final AppUserRepository appUserRepository;
+    private final CategoryRepository categoryRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -49,5 +53,12 @@ public class AppUserService implements AppUserServiceDefinition, UserDetailsServ
     public List<AppUser> getUsers() {
         log.info("Fetching all users");
         return appUserRepository.findAll();
+    }
+
+    @Override
+    public void addCategoryToUser(String username, String categoryName) {
+        AppUser appUser = appUserRepository.findAppUserByUsername(username);
+        Category category = categoryRepository.findCategoryByName(categoryName);
+        appUser.getCategories().add(category);
     }
 }

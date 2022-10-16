@@ -15,14 +15,14 @@ public class AppUser {
     private String username;
     private String email;
     private String password;
-//    @OneToMany(cascade = CascadeType.REMOVE)
-//    private Collection<Category> categories;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    private Collection<Category> categories;
 
-//    public AppUser(Long id,String name, String username, String email, String password){
-//        this.id = id;
-//        this.name = name;
-//        this.username = username;
-//        this.email = email;
-//        this.password = password;
-//    }
+    public AppUser(Long id,String name, String username, String email, String password){
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 }
