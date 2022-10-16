@@ -32,12 +32,12 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 public class AppUserController {
     private final AppUserService userService;
 
-    @GetMapping
+    @GetMapping("/users")
     public ResponseEntity<List<AppUser>>getUsers(){
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
-    @PostMapping
+    @PostMapping("/user")
     public ResponseEntity<AppUser>saveUser(@RequestBody AppUser appUser){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(appUser));

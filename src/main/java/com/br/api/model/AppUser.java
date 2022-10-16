@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
 public class AppUser {
@@ -17,5 +15,14 @@ public class AppUser {
     private String username;
     private String email;
     private String password;
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private Collection<Category> categories;
 
+    public AppUser(Long id,String name, String username, String email, String password){
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 }

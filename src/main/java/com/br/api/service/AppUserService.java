@@ -1,11 +1,12 @@
 package com.br.api.service;
 
 import com.br.api.model.AppUser;
+import com.br.api.model.Category;
 import com.br.api.repository.AppUserRepository;
+import com.br.api.repository.CategoryRepository;
 import com.br.api.service.definition.AppUserServiceDefinition;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,6 +20,7 @@ import java.util.List;
 @Service @RequiredArgsConstructor @Transactional @Slf4j
 public class AppUserService implements AppUserServiceDefinition, UserDetailsService {
     private final AppUserRepository appUserRepository;
+    private final CategoryRepository categoryRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -50,5 +52,12 @@ public class AppUserService implements AppUserServiceDefinition, UserDetailsServ
     public List<AppUser> getUsers() {
         log.info("Fetching all users");
         return appUserRepository.findAll();
+    }
+
+    @Override
+    public void addCategoryToAppUser(String username, String category) {
+        AppUser appUser = appUserRepository.findAppUserByUsername(username);
+        Category userCategory = categoryRepository.findByCategoryName(category);
+        appUser.getCategories().add(userCategory);
     }
 }
