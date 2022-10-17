@@ -28,20 +28,27 @@ public class ApiApplication {
 	@Bean
 	CommandLineRunner run(AppUserService userService, CategoryService categoryService, OptionService optionService){
 		return args -> {
+			// cadastro de categorias
 			categoryService.saveCategory(new Category(null, "categoriaTest1"));
 			categoryService.saveCategory(new Category(null, "categoriaTest2"));
 			categoryService.saveCategory(new Category(null, "categoriaTest3"));
 			categoryService.saveCategory(new Category(null, "categoriaTest4"));
+			categoryService.saveCategory(new Category(null, "filmes"));
+			categoryService.saveCategory(new Category(null, "roupas"));
+			Category lugar = categoryService.saveCategory(new Category(null, "lugar"));
+			Category desafio = categoryService.saveCategory(new Category(null, "desafio"));
 
-			optionService.saveOption(new CategoryOption(null, "optionTeste1"));
-			optionService.saveOption(new CategoryOption(null, "optionTeste2"));
+			// cadastro de opções
+			optionService.saveOption(new CategoryOption(null, "optionTeste1",lugar));
+			optionService.saveOption(new CategoryOption(null, "optionTeste2", desafio));
 
+			// cadastro de usuário e adicionando categoria ao usuário
 			userService.saveUser(new AppUser(null, "teste1", "teste1", "teste1", "teste1"));
 			userService.addCategoryToUser("teste1", "categoriaTest1");
 			userService.addCategoryToUser("teste1", "categoriaTest2");
-
 			userService.saveUser(new AppUser(null, "teste2", "teste2", "teste2", "teste2"));
 
+			// adiciona opção na categoria
 			categoryService.addOptionToCategory("optionTeste1", "categoriaTest1");
 		};
 	}

@@ -1,5 +1,6 @@
 package com.br.api.service;
 
+import com.br.api.model.Category;
 import com.br.api.model.CategoryOption;
 import com.br.api.repository.OptionRepository;
 import com.br.api.service.definition.OptionServiceDefinition;
