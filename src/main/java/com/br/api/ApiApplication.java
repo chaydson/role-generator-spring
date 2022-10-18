@@ -31,16 +31,18 @@ public class ApiApplication {
 			// cadastro de categorias
 			categoryService.saveCategory(new Category(null, "categoriaTest1"));
 			categoryService.saveCategory(new Category(null, "categoriaTest2"));
-			categoryService.saveCategory(new Category(null, "categoriaTest3"));
-			categoryService.saveCategory(new Category(null, "categoriaTest4"));
 			categoryService.saveCategory(new Category(null, "filmes"));
 			categoryService.saveCategory(new Category(null, "roupas"));
 			Category lugar = categoryService.saveCategory(new Category(null, "lugar"));
 			Category desafio = categoryService.saveCategory(new Category(null, "desafio"));
 
 			// cadastro de opções
-			optionService.saveOption(new CategoryOption(null, "optionTeste1",lugar));
+			optionService.saveOption(new CategoryOption(null, "optionTeste1", lugar));
 			optionService.saveOption(new CategoryOption(null, "optionTeste2", desafio));
+			optionService.saveOption(new CategoryOption(null, "optionTeste3", desafio));
+
+//			optionService.saveOption(new CategoryOption(null, "optionTeste1"));
+//			optionService.saveOption(new CategoryOption(null, "optionTeste2"));
 
 			// cadastro de usuário e adicionando categoria ao usuário
 			userService.saveUser(new AppUser(null, "teste1", "teste1", "teste1", "teste1"));
@@ -49,7 +51,7 @@ public class ApiApplication {
 			userService.saveUser(new AppUser(null, "teste2", "teste2", "teste2", "teste2"));
 
 			// adiciona opção na categoria
-			categoryService.addOptionToCategory("optionTeste1", "categoriaTest1");
+//			categoryService.addOptionToCategory("optionTeste1", "categoriaTest1");
 		};
 	}
 

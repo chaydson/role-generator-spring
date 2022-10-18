@@ -1,6 +1,5 @@
 package com.br.api.service;
 
-import com.br.api.model.Category;
 import com.br.api.model.CategoryOption;
 import com.br.api.repository.OptionRepository;
 import com.br.api.service.definition.OptionServiceDefinition;
@@ -17,9 +16,11 @@ import java.util.List;
 @Slf4j
 public class OptionService implements OptionServiceDefinition {
     private final OptionRepository optionRepository;
+    private final CategoryService categoryService;
 
     @Override
     public CategoryOption saveOption(CategoryOption categoryOption) {
+//        categoryService.addOptionToCategory(categoryOption.getName(), categoryOption.getCategory().getName());
         log.info("Saving new option to the database");
         return optionRepository.save(categoryOption);
     }
